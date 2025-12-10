@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Weihnachtsgeschenke-Finder | Dein perfektes Geschenk</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Raleway:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(135deg, #165B33 0%, #BB2528 50%, #146B3A 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Snowflakes Animation */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            z-index: 1;
+            color: white;
+            font-size: 1em;
+            font-family: Arial;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Glitter Effect */
+        .glitter {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: gold;
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 5px solid #FFD700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '✨';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            top: -20px;
+            left: -20px;
+            animation: rotate 10s linear infinite;
+        }
+
+        .header::after {
+            content: '🎁';
+            position: absolute;
+            font-size: 100px;
+            opacity: 0.1;
+            bottom: -20px;
+            right: -20px;
+            animation: rotate 10s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 3.5em;
+            color: #BB2528;
+            text-shadow: 3px 3px 0 #FFD700, 6px 6px 0 #165B33;
+            margin-bottom: 15px;
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #165B33;
+            font-weight: 600;
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border: 3px solid #FFD700;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: transform 0.3s;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+        }
+
+        /* Input Section */
+        .input-section {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 4px solid #FFD700;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #BB2528;
+            margin-bottom: 10px;
+            font-family: 'Mountains of Christmas', cursive;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            border: 3px solid #165B33;
+            border-radius: 15px;
+            background: white;
+            color: #165B33;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        select:hover, select:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            outline: none;
+        }
+
+        .find-button {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: 700;
+            background: linear-gradient(45deg, #BB2528, #FF3B3F);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(187, 37, 40, 0.4);
+            transition: all 0.3s;
+            font-family: 'Mountains of Christmas', cursive;
+            margin-top: 20px;
+        }
+
+        .find-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(187, 37, 40, 0.6);
+        }
+
+        .find-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Slot Machine */
+        .slot-machine {
+            display: none;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border: 5px solid #FFD700;
+            margin-bottom: 30px;
+        }
+
+        .slot-machine.active {
+            display: block;
+        }
+
+        .slots-title {
+            text-align: center;
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2.5em;
+            color: #BB2528;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 0 #FFD700;
+        }
+
+        .slots-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .slot {
+            background: white;
+            border: 4px solid #165B33;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slot::before {
+            content: '⭐';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2em;
+            opacity: 0.3;
+        }
+
+        .slot:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+            border-color: #FFD700;
+        }
+
+        .slot.spinning {
+            animation: spin 0.5s ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .gift-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 3px solid #FFD700;
+        }
+
+        .gift-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #BB2528;
+            margin-bottom: 10px;
+            font-family: 'Mountains of Christmas', cursive;
+        }
+
+        .gift-price {
+            font-size: 1.1em;
+            color: #165B33;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #165B33;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .buy-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .reset-button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 15px 40px;
+            background: #165B33;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reset-button:hover {
+            background: #1a7a42;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 1.1em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .slots-container {
+                grid-template-columns: 1fr;
+            }
+
+            .input-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Snowflakes -->
+    <div id="snowflakes"></div>
+
+    <!-- Glitter -->
+    <div id="glitter"></div>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl" title="Weihnachtsmusik an/aus">
+        🎵 <span id="musicStatus">Musik aus</span>
+    </div>
+
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎄 Weihnachtsgeschenke-Finder 🎁</h1>
+            <p class="subtitle">Finde das perfekte Geschenk in 3 einfachen Schritten!</p>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <label>1️⃣ Was sind die Interessen der Person?</label>
+                <select id="interest">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="tech">Technologie & Gadgets</option>
+                    <option value="sports">Sport & Fitness</option>
+                    <option value="creative">Kreativität & Kunst</option>
+                    <option value="cooking">Kochen & Genuss</option>
+                    <option value="reading">Lesen & Lernen</option>
+                    <option value="travel">Reisen & Abenteuer</option>
+                    <option value="wellness">Wellness & Entspannung</option>
+                    <option value="music">Musik & Entertainment</option>
+                    <option value="gaming">Gaming & Fun</option>
+                    <option value="fashion">Mode & Style</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>2️⃣ Welche Altersgruppe?</label>
+                <select id="age">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="teen">Teenager (13-19)</option>
+                    <option value="young">Junge Erwachsene (20-35)</option>
+                    <option value="adult">Erwachsene (36-55)</option>
+                    <option value="senior">Senioren (55+)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>3️⃣ Was ist dein Budget?</label>
+                <select id="budget">
+                    <option value="">-- Bitte wählen --</option>
+                    <option value="low">Budget (10-30€)</option>
+                    <option value="medium">Mittel (30-100€)</option>
+                    <option value="high">Premium (100€+)</option>
+                </select>
+            </div>
+
+            <button class="find-button" onclick="findGifts()">
+                ✨ Geschenke finden! ✨
+            </button>
+        </div>
+
+        <!-- Slot Machine Results -->
+        <div class="slot-machine" id="slotMachine">
+            <h2 class="slots-title">🎰 Deine Top 3 Geschenk-Ideen! 🎰</h2>
+            <div class="slots-container" id="slotsContainer"></div>
+            <button class="reset-button" onclick="resetFinder()">🔄 Neue Suche</button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>🎅 Frohe Weihnachten! Made with ❤️ for stress-free gift shopping 🎄</p>
+        </div>
+    </div>
+
+    <script>
+        // Gift Database
+        const giftDatabase = [
+            // Tech & Gadgets
+            { name: 'Wireless Earbuds', image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400', price: '50€', link: 'https://www.amazon.de/s?k=wireless+earbuds', tags: ['tech', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Smartwatch', image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400', price: '150€', link: 'https://www.amazon.de/s?k=smartwatch', tags: ['tech', 'sports', 'young', 'adult', 'high'], priceRange: 'high' },
+            { name: 'LED Schreibtischlampe', image: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400', price: '25€', link: 'https://www.amazon.de/s?k=led+desk+lamp', tags: ['tech', 'reading', 'young', 'adult', 'low'], priceRange: 'low' },
+            { name: 'Powerbank', image: 'https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400', price: '20€', link: 'https://www.amazon.de/s?k=powerbank', tags: ['tech', 'travel', 'teen', 'young', 'low'], priceRange: 'low' },
+
+            // Sports & Fitness
+            { name: 'Yoga Matte Premium', image: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400', price: '45€', link: 'https://www.amazon.de/s?k=yoga+mat', tags: ['sports', 'wellness', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Fitness Tracker', image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400', price: '70€', link: 'https://www.amazon.de/s?k=fitness+tracker', tags: ['sports', 'tech', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Trinkflasche isoliert', image: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400', price: '28€', link: 'https://www.amazon.de/s?k=insulated+water+bottle', tags: ['sports', 'travel', 'young', 'adult', 'low'], priceRange: 'low' },
+
+            // Creative & Art
+            { name: 'Aquarell Malset', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400', price: '35€', link: 'https://www.amazon.de/s?k=watercolor+set', tags: ['creative', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Sketchbook Premium', image: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=400', price: '18€', link: 'https://www.amazon.de/s?k=sketchbook', tags: ['creative', 'teen', 'young', 'low'], priceRange: 'low' },
+            { name: 'Digitales Zeichentablett', image: 'https://images.unsplash.com/photo-1612832021937-b5c86f3e5af4?w=400', price: '120€', link: 'https://www.amazon.de/s?k=drawing+tablet', tags: ['creative', 'tech', 'teen', 'young', 'high'], priceRange: 'high' },
+
+            // Cooking & Food
+            { name: 'Gewürz-Set Premium', image: 'https://images.unsplash.com/photo-1596040033229-a0b4b5b98aaf?w=400', price: '40€', link: 'https://www.amazon.de/s?k=spice+set', tags: ['cooking', 'adult', 'senior', 'medium'], priceRange: 'medium' },
+            { name: 'Kochbuch Modern', image: 'https://images.unsplash.com/photo-1512034831314-e85d5f1f7ba1?w=400', price: '25€', link: 'https://www.amazon.de/s?k=cookbook', tags: ['cooking', 'reading', 'young', 'adult', 'low'], priceRange: 'low' },
+            { name: 'Espressomaschine', image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=400', price: '180€', link: 'https://www.amazon.de/s?k=espresso+machine', tags: ['cooking', 'adult', 'senior', 'high'], priceRange: 'high' },
+
+            // Reading & Learning
+            { name: 'E-Book Reader', image: 'https://images.unsplash.com/photo-1589998059171-988d887df646?w=400', price: '120€', link: 'https://www.amazon.de/s?k=kindle', tags: ['reading', 'tech', 'young', 'adult', 'senior', 'high'], priceRange: 'high' },
+            { name: 'Buchständer aus Holz', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400', price: '22€', link: 'https://www.amazon.de/s?k=book+stand', tags: ['reading', 'adult', 'senior', 'low'], priceRange: 'low' },
+            { name: 'Leselampe LED', image: 'https://images.unsplash.com/photo-1507852564438-a119d2d9f6b7?w=400', price: '30€', link: 'https://www.amazon.de/s?k=reading+lamp', tags: ['reading', 'senior', 'adult', 'medium'], priceRange: 'medium' },
+
+            // Travel & Adventure
+            { name: 'Reiserucksack 40L', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400', price: '65€', link: 'https://www.amazon.de/s?k=travel+backpack', tags: ['travel', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Weltkarte zum Rubbeln', image: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=400', price: '15€', link: 'https://www.amazon.de/s?k=scratch+map', tags: ['travel', 'young', 'adult', 'low'], priceRange: 'low' },
+            { name: 'Reiseadapter Universal', image: 'https://images.unsplash.com/photo-1585079542156-2755d9c8a094?w=400', price: '20€', link: 'https://www.amazon.de/s?k=travel+adapter', tags: ['travel', 'tech', 'young', 'adult', 'low'], priceRange: 'low' },
+
+            // Wellness & Relaxation
+            { name: 'Aromatherapie Diffuser', image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=400', price: '35€', link: 'https://www.amazon.de/s?k=aromatherapy+diffuser', tags: ['wellness', 'adult', 'senior', 'medium'], priceRange: 'medium' },
+            { name: 'Massage Gun', image: 'https://images.unsplash.com/photo-1621923248025-5e5b28d99bb8?w=400', price: '90€', link: 'https://www.amazon.de/s?k=massage+gun', tags: ['wellness', 'sports', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Gewichtsdecke', image: 'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=400', price: '70€', link: 'https://www.amazon.de/s?k=weighted+blanket', tags: ['wellness', 'adult', 'senior', 'medium'], priceRange: 'medium' },
+
+            // Music & Entertainment
+            { name: 'Bluetooth Lautsprecher', image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400', price: '55€', link: 'https://www.amazon.de/s?k=bluetooth+speaker', tags: ['music', 'tech', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Vinyl Schallplatte Klassiker', image: 'https://images.unsplash.com/photo-1603048588665-791ca8aea617?w=400', price: '25€', link: 'https://www.amazon.de/s?k=vinyl+records', tags: ['music', 'adult', 'senior', 'low'], priceRange: 'low' },
+            { name: 'Kopfhörer Noise Cancelling', image: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400', price: '200€', link: 'https://www.amazon.de/s?k=noise+cancelling+headphones', tags: ['music', 'tech', 'travel', 'young', 'adult', 'high'], priceRange: 'high' },
+
+            // Gaming & Fun
+            { name: 'Gaming Maus RGB', image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400', price: '45€', link: 'https://www.amazon.de/s?k=gaming+mouse', tags: ['gaming', 'tech', 'teen', 'young', 'medium'], priceRange: 'medium' },
+            { name: 'Nintendo Switch Spiel', image: 'https://images.unsplash.com/photo-1578303512597-81e6cc155b3e?w=400', price: '50€', link: 'https://www.amazon.de/s?k=nintendo+switch+games', tags: ['gaming', 'teen', 'young', 'medium'], priceRange: 'medium' },
+            { name: 'Gaming Stuhl', image: 'https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=400', price: '180€', link: 'https://www.amazon.de/s?k=gaming+chair', tags: ['gaming', 'teen', 'young', 'high'], priceRange: 'high' },
+
+            // Fashion & Style
+            { name: 'Designer Geldbörse', image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400', price: '75€', link: 'https://www.amazon.de/s?k=wallet', tags: ['fashion', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Sonnenbrille Retro', image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400', price: '40€', link: 'https://www.amazon.de/s?k=sunglasses', tags: ['fashion', 'young', 'adult', 'medium'], priceRange: 'medium' },
+            { name: 'Smartwatch Armband Leder', image: 'https://images.unsplash.com/photo-1617625802912-cde586faf331?w=400', price: '28€', link: 'https://www.amazon.de/s?k=watch+strap', tags: ['fashion', 'tech', 'young', 'adult', 'low'], priceRange: 'low' },
+        ];
+
+        // Music Control
+        let isMusicPlaying = false;
+        const musicControl = document.getElementById('musicControl');
+        const bgMusic = document.getElementById('bgMusic');
+        const musicStatus = document.getElementById('musicStatus');
+
+        musicControl.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicStatus.textContent = 'Musik aus';
+                isMusicPlaying = false;
+            } else {
+                bgMusic.play();
+                musicStatus.textContent = 'Musik an';
+                isMusicPlaying = true;
+            }
+        });
+
+        // Create Snowflakes
+        function createSnowflakes() {
+            const snowflakesContainer = document.getElementById('snowflakes');
+            const snowflakeChars = ['❄', '❅', '❆'];
+
+            for (let i = 0; i < 20; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakeChars[Math.floor(Math.random() * snowflakeChars.length)];
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.fontSize = (Math.random() * 1 + 0.5) + 'em';
+                snowflakesContainer.appendChild(snowflake);
+            }
+        }
+
+        // Create Glitter
+        function createGlitter() {
+            const glitterContainer = document.getElementById('glitter');
+
+            for (let i = 0; i < 30; i++) {
+                const glitter = document.createElement('div');
+                glitter.className = 'glitter';
+                glitter.style.left = Math.random() * 100 + '%';
+                glitter.style.top = Math.random() * 100 + '%';
+                glitter.style.animationDelay = Math.random() * 2 + 's';
+                glitterContainer.appendChild(glitter);
+            }
+        }
+
+        // Find Gifts Function
+        function findGifts() {
+            const interest = document.getElementById('interest').value;
+            const age = document.getElementById('age').value;
+            const budget = document.getElementById('budget').value;
+
+            if (!interest || !age || !budget) {
+                alert('🎅 Bitte fülle alle 3 Felder aus! 🎄');
+                return;
+            }
+
+            // Filter and score gifts
+            const scoredGifts = giftDatabase.map(gift => {
+                let score = 0;
+                if (gift.tags.includes(interest)) score += 3;
+                if (gift.tags.includes(age)) score += 2;
+                if (gift.priceRange === budget) score += 2;
+                return { ...gift, score };
+            }).filter(gift => gift.score > 0)
+              .sort((a, b) => b.score - a.score)
+              .slice(0, 3);
+
+            if (scoredGifts.length === 0) {
+                alert('🎅 Keine passenden Geschenke gefunden. Versuche andere Optionen! 🎄');
+                return;
+            }
+
+            // Show slot machine with animation
+            const slotMachine = document.getElementById('slotMachine');
+            const slotsContainer = document.getElementById('slotsContainer');
+
+            // Clear previous results
+            slotsContainer.innerHTML = '';
+
+            // Create slots with spinning animation
+            scoredGifts.forEach((gift, index) => {
+                setTimeout(() => {
+                    const slot = document.createElement('div');
+                    slot.className = 'slot spinning';
+                    slot.innerHTML = `
+                        <img src="${gift.image}" alt="${gift.name}" class="gift-image" />
+                        <div class="gift-name">${gift.name}</div>
+                        <div class="gift-price">${gift.price}</div>
+                        <a href="${gift.link}" target="_blank" class="buy-button">🛒 Jetzt kaufen</a>
+                    `;
+                    slotsContainer.appendChild(slot);
+
+                    // Remove spinning class after animation
+                    setTimeout(() => {
+                        slot.classList.remove('spinning');
+                    }, 500);
+                }, index * 200);
+            });
+
+            // Show slot machine
+            slotMachine.classList.add('active');
+            slotMachine.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Reset Function
+        function resetFinder() {
+            document.getElementById('interest').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('budget').value = '';
+            document.getElementById('slotMachine').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize animations on page load
+        window.addEventListener('load', () => {
+            createSnowflakes();
+            createGlitter();
+        });
+    </script>
+</body>
+</html>
